@@ -17,6 +17,12 @@ import model.TabelaModel;
  * @author Daniel Leal
  */
 public class TabelaController {
+
+    public TabelaController() {
+        
+    }
+    
+    
     public boolean inserirJogo(TabelaModel tabela){
         boolean retorno = false;
         Conexao c = new Conexao();
@@ -79,8 +85,7 @@ public class TabelaController {
                   tabela.setQuebrarecordemax(x.getQuebrarecordemax());
                   tabela.setJogo(x.getJogo()+1);
                 }
-            } 
-                    
+            }           
         }
     }
     
@@ -123,6 +128,23 @@ public class TabelaController {
     }
     
     
+    
+    public boolean excluir(TabelaModel tabela){
+        boolean retorno = false;
+        Conexao c = new Conexao();
+        String sql = "delete from jogos where jogo = ?";
+        try{
+            PreparedStatement sentenca = c.con.prepareStatement(sql);
+            sentenca.setInt(1, tabela.getJogo());
+            if(!sentenca.execute())
+                retorno = true;
+            c.desconectar();
+        }catch(SQLException erro){
+            System.out.println("Erro na sentenca: "+ erro.getMessage());
+        }
+        return retorno;
+    }
+    
     public ArrayList<TabelaModel> selecionarTodosTabelas(){
         ArrayList<TabelaModel> lista = new ArrayList<>();
         Conexao c = new Conexao();
@@ -147,5 +169,31 @@ public class TabelaController {
         return lista;
     }
         
-    
+    public TabelaModel selecionarUltimo(){
+        ArrayList<TabelaModel> todosItens = new ArrayList<>();
+        todosItens = selecionarTodosTabelas();
+        int cont = 0;
+        for (TabelaModel x:todosItens) {
+            cont++;            
+        }
+        TabelaModel tabela = new TabelaModel();
+        tabela.setJogo(cont);
+        TabelaModel p = null;
+        Conexao c = new Conexao();
+        String sql = "select * from jogos where jogo = ?";
+        try{
+            PreparedStatement sentenca = c.con.prepareStatement(sql);
+            sentenca.setInt(1, tabela.getJogo());
+            ResultSet rs = sentenca.executeQuery();
+            if(rs.next()){
+                p = new TabelaModel();
+                p.setJogo(rs.getInt("jogo"));
+                p.setPlacar(rs.getInt("placar"));                
+            }
+            c.desconectar();
+        }catch(SQLException erro){
+            System.out.println("Erro na sentenca: "+ erro.getMessage());
+        }
+        return p;
+    }
 }
