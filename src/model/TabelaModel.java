@@ -5,15 +5,16 @@ package model;
  *
  * @author Daniel Leal
  */
-public class TabelaModel {
-    int jogo;
-    int placar;
-    int minimotemp;
-    int maxtemp;
-    int quebrarecordemax;
-    int quebrarecordemin;
-
-    public int getJogo() {
+public class TabelaModel { // classe com Model, todas variaveis do tabela
+    int jogo; // Variavel inteira do Numero do Jogo
+    int placar; // Variavel inteira Placar do Jogo
+    int minimotemp;//Variavel inteira  Minimo da temporada
+    int maxtemp;//Variavel inteira Maximo da temporada
+    int quebrarecordemax;//Variavel inteira quebra de recorde maximo
+    int quebrarecordemin;//Variavel inteira quebra de recorde minimo
+    
+    // Metodos get e set das variaveis criadas
+    public int getJogo() { 
         return jogo;
     }
 
@@ -62,4 +63,4 @@ public class TabelaModel {
     }
     
     
-}
+} // fim da classe java tabela model

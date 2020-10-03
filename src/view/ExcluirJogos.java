@@ -146,10 +146,11 @@ public class ExcluirJogos extends javax.swing.JFrame {
     
     
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
-        Principal principal = new Principal();
-        principal.setVisible(true);
-        principal.atualizarTabela();
-        dispose();
+        // botão para sair da tela de exclusão de jogo
+        Principal principal = new Principal(); // cria uma nova tela Principal
+        principal.setVisible(true); // torna ela visivel
+        principal.atualizarTabela(); // atualiza tabela de jogos
+        dispose();  // fecha a tela de exclusã ode jogo
     }//GEN-LAST:event_jbSairActionPerformed
 
     private void jtxPlacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxPlacarActionPerformed
@@ -161,28 +162,30 @@ public class ExcluirJogos extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxJogoActionPerformed
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExcluirActionPerformed
-        TabelaController tabela = new TabelaController();
-        boolean excluir = false;
-        TabelaModel t = new TabelaModel();
-        t.setJogo(Integer.parseInt(jtxJogo.getText()));
-        excluir = tabela.excluir(t);
-        if (excluir = true){
-            JOptionPane.showMessageDialog(this, "Jogo excluido com sucesso!",
-                "Retorno", JOptionPane.ERROR_MESSAGE);
-            jtxJogo.setText("");
-            jtxPlacar.setText("");
+        //botão para excluir tabela
+        TabelaController tabela = new TabelaController(); // cria uma variavel tabela do tipo Tabela Controller que permite chamar os metodos de exclusao
+        boolean excluir = false; // variavel booleana para armazenar se conseguiu excluir 
+        TabelaModel t = new TabelaModel(); // Cria uma variavel t do tipo TabelaModel para armazenar os dados digitados no JTextField
+        t.setJogo(Integer.parseInt(jtxJogo.getText())); // armazena o ultimo jogo
+        excluir = tabela.excluir(t); // chama a função de excluir passando o numero do jogo e retornando booleano
+        if (excluir = true){ // se ocorreu tudo bem na exclusão exibe mensagem de confirmação
+            JOptionPane.showMessageDialog(this, "Jogo excluido com sucesso!", 
+                "Retorno", JOptionPane.INFORMATION_MESSAGE); // mensagem de sucesso
+            jtxJogo.setText(""); // esvazia o jtxfield de jogo
+            jtxPlacar.setText(""); //esvazia o jtxfield de Placar
         }else{
             JOptionPane.showMessageDialog(this, "Erro ao Excluir o Jogo!",
                 "Retorno", JOptionPane.ERROR_MESSAGE);
    
         }
-        TabelaModel novatabela = new TabelaModel();
-        TabelaController novot = new TabelaController();
-        novatabela = novot.selecionarUltimo();
-        jtxJogo.setText(String.valueOf(novatabela.getJogo()));
-        jtxPlacar.setText(String.valueOf(novatabela.getPlacar()));
+        
+        TabelaModel novatabela = new TabelaModel();  // cria uma nova tabela para armazenar dados de jogos
+        TabelaController novot = new TabelaController(); // cria novo controler que permite chamar metodo de selecionar
+        novatabela = novot.selecionarUltimo(); // busca novamente a ultimo jogo na tabela
+        jtxJogo.setText(String.valueOf(novatabela.getJogo())); // define o ultimo jogo
+        jtxPlacar.setText(String.valueOf(novatabela.getPlacar())); // define o ultimo placar
     }//GEN-LAST:event_jbExcluirActionPerformed
-
+    // Main do JFrame de Excluir Jogos
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

@@ -7,12 +7,12 @@ import javax.swing.table.DefaultTableModel;
 import model.TabelaModel;
 
 
-public class Principal extends javax.swing.JFrame {
-    public Principal() {
-        initComponents();
-        atualizarTabela();
-        this.setLocationRelativeTo(null);
-        setResizable(false);
+public class Principal extends javax.swing.JFrame { // JFrame com a tela principal da aplicação
+    public Principal() { // construtor do JFrame
+        initComponents(); // inicia todos componentes do JFrame
+        atualizarTabela(); // atualiza a Tabela de Jogos
+        this.setLocationRelativeTo(null);  // seta a localização da tela
+        setResizable(false); // impede de maximinzar a tela
     }
     
     @SuppressWarnings("unchecked")
@@ -23,8 +23,8 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTabela = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmCadastros = new javax.swing.JMenu();
+        jmNovoJogo = new javax.swing.JMenuItem();
         jmExcluir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -32,11 +32,6 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(241, 241, 241));
-        jPanel1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jPanel1PropertyChange(evt);
-            }
-        });
 
         jtTabela.setBackground(new java.awt.Color(241, 241, 241));
         jtTabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -60,16 +55,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jtTabela.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jtTabela.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtTabelaMouseClicked(evt);
-            }
-        });
-        jtTabela.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jtTabelaPropertyChange(evt);
-            }
-        });
         jScrollPane1.setViewportView(jtTabela);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -89,15 +74,15 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(175, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Cadastros");
+        jmCadastros.setText("Cadastros");
 
-        jMenuItem1.setText("Novo Jogo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmNovoJogo.setText("Novo Jogo");
+        jmNovoJogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmNovoJogoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jmCadastros.add(jmNovoJogo);
 
         jmExcluir.setText("Excluir Jogo");
         jmExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -105,9 +90,9 @@ public class Principal extends javax.swing.JFrame {
                 jmExcluirActionPerformed(evt);
             }
         });
-        jMenu1.add(jmExcluir);
+        jmCadastros.add(jmExcluir);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jmCadastros);
 
         jMenu2.setText("Sair");
         jMenu2.addActionListener(new java.awt.event.ActionListener() {
@@ -145,49 +130,37 @@ public class Principal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    public void atualizarTabela(){
-        TabelaController controle = new TabelaController();
-        ArrayList<TabelaModel> lista = controle.selecionarTodosTabelas();
-        if(!lista.isEmpty()){
-            DefaultTableModel modelo = (DefaultTableModel)jtTabela.getModel();
-            modelo.setRowCount(0);
-            for(TabelaModel p: lista){
-                modelo.addRow(new String[]{
-                    String.valueOf(p.getJogo()),
-                    String.valueOf(p.getPlacar()),
-                    String.valueOf(p.getMinimotemp()),
-                    String.valueOf(p.getMaxtemp()),
-                    String.valueOf(p.getQuebrarecordemin()),
-                    String.valueOf(p.getQuebrarecordemax())
+    public void atualizarTabela(){ // Classe para atualizar a Tabela
+        TabelaController controle = new TabelaController(); // Cria uma variavel com a classe Java Controller
+        ArrayList<TabelaModel> lista = controle.selecionarTodosTabelas(); // Array List com todas as Tabelas
+        if(!lista.isEmpty()){ // se a lista estiver diferente de vazio
+            DefaultTableModel modelo = (DefaultTableModel)jtTabela.getModel(); // seta as variaveis model na tabela
+            modelo.setRowCount(0); // seta a posição inicial da tabela
+            for(TabelaModel p: lista){ // pecorre todas lista com o Model e a lista criada
+                modelo.addRow(new String[]{ // cria uma linha string com modelo da Tabela
+                    String.valueOf(p.getJogo()), // gravar o jogo na tabela
+                    String.valueOf(p.getPlacar()), // gravar o placar na tabela
+                    String.valueOf(p.getMinimotemp()), // gravar o minimo da temporada na tabela
+                    String.valueOf(p.getMaxtemp()), // gravar o maximo da temporada na tabela
+                    String.valueOf(p.getQuebrarecordemin()),// gravar a quebra de recorde minimo na tabela
+                    String.valueOf(p.getQuebrarecordemax()) // gravar a quebra de recorde maximo na tabela
                 });
-            }
-        }
+            }// fim do for pra pecorrer toda a lista
+        } // fim do if se a lista tiver diferente de 0
     }
     int linha =0;
-    @SuppressWarnings("unchecked")
+    private void jmNovoJogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmNovoJogoActionPerformed
+    // SubMenu para cadastrar novo jogo
+    CadastroJogos cadastro = new CadastroJogos(); // cria uma nova tela para cadastrar o novo jogo
+    cadastro.setVisible(true); // torna visivel a nova tela de cadastrar jogo
+    setVisible(false); // deixa a tela principal invisivel
+    }//GEN-LAST:event_jmNovoJogoActionPerformed
     
-    private void jtTabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTabelaMouseClicked
-
-    }//GEN-LAST:event_jtTabelaMouseClicked
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    CadastroJogos cadastro = new CadastroJogos();
-    cadastro.setVisible(true);
-    setVisible(false);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jtTabelaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtTabelaPropertyChange
-        
-    }//GEN-LAST:event_jtTabelaPropertyChange
-
-    private void jPanel1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPanel1PropertyChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel1PropertyChange
-
     private void jmExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmExcluirActionPerformed
-    ExcluirJogos jogos = new ExcluirJogos();
-    jogos.setVisible(true);
-    setVisible(false);
+    //Sub Menu para Excluir Jogos
+    ExcluirJogos jogos = new ExcluirJogos(); // cria a nova tela de excluir jogos
+    jogos.setVisible(true); // seta a tela como visivel
+    setVisible(false); // seta a tela principal invisivel
     }//GEN-LAST:event_jmExcluirActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
@@ -195,11 +168,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        System.exit(0);
+        //Sub menu para sair
+        System.exit(0); // aborda a aplicação
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
+    // classe main para criar a tela principal
     public static void main(String args[]) {
-
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -225,14 +198,14 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu jmCadastros;
     private javax.swing.JMenuItem jmExcluir;
+    private javax.swing.JMenuItem jmNovoJogo;
     private javax.swing.JTable jtTabela;
     // End of variables declaration//GEN-END:variables
 }

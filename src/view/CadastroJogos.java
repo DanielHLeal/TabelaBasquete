@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package view;
 
 import controller.TabelaController;
@@ -15,12 +11,12 @@ import model.TabelaModel;
  *
  * @author Daniel Leal
  */
-public class CadastroJogos extends javax.swing.JFrame {
+public class CadastroJogos extends javax.swing.JFrame { // Tela JFrame de Cadastro de Jogos
 
-    public CadastroJogos() {
-        initComponents();
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE); 
-        setResizable(false);
+    public CadastroJogos() { // construtor do JFrame de Cadastro de Jogos
+        initComponents(); //inicializa todos componentes
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE); // impossibilita de fechar a tela
+        setResizable(false); // imposibilita de maximizar a tela
     }
 
     @SuppressWarnings("unchecked")
@@ -61,11 +57,6 @@ public class CadastroJogos extends javax.swing.JFrame {
         jLabel1.setText("Placar:");
 
         jtxPlacar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jtxPlacar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxPlacarActionPerformed(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -143,47 +134,42 @@ public class CadastroJogos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtxPlacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxPlacarActionPerformed
-
-    }//GEN-LAST:event_jtxPlacarActionPerformed
-
     private void jbCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrarActionPerformed
         
     }//GEN-LAST:event_jbCadastrarActionPerformed
 
     private void jbSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSairActionPerformed
-
-        dispose();
+        // botão de sair de da tela de cadastrar
+        dispose(); // fechar a tela
     }//GEN-LAST:event_jbSairActionPerformed
     
-    public void limparCampos(){
-        jtxPlacar.setText("");
+    public void limparCampos(){ // classe para limpar os campos da tela
+        jtxPlacar.setText(""); // seta o texfield do palcar vazio
     }
     
     private void jbCadastrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCadastrar1ActionPerformed
-        TabelaModel tabela = new TabelaModel();
-        
-        tabela.setPlacar(Integer.parseInt(jtxPlacar.getText()));
-        TabelaController controle = new TabelaController();
-        if(controle.inserirJogo(tabela)){
-            JOptionPane.showMessageDialog(this, "Tabela Inserido com sucesso!");
-            limparCampos();
-            
-        }else{
+        // botão para cadastrar novo jogo
+        TabelaModel tabela = new TabelaModel(); // Cria uma variavel tabela do tipo Tabela Model
+        tabela.setPlacar(Integer.parseInt(jtxPlacar.getText())); // seta o placar digitado na variavel Tabela Model
+        TabelaController controle = new TabelaController(); // cria uma variavel controle do tipo TabelaController
+        if(controle.inserirJogo(tabela)){ //if chamando para inserir o jogo na tabela, se ocorrer tudo bem ele entra no if 
+            JOptionPane.showMessageDialog(this, "Tabela Inserido com sucesso!"); // mensagem confirmando a inserção
+            limparCampos(); // chama o metodo para limpar os campos 
+        }else{ // caso não ocorra bem ele entra no else
             JOptionPane.showMessageDialog(this, "Erro ao Inserir o tabela!", 
-            "Retorno", JOptionPane.ERROR_MESSAGE);
-        }
-        
+            "Retorno", JOptionPane.ERROR_MESSAGE); // mensagem de erro ao inserir
+        }// fim do else
     }//GEN-LAST:event_jbCadastrar1ActionPerformed
 
     private void jbSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSair1ActionPerformed
-        Principal principal = new Principal();
-        principal.setVisible(true);
-        principal.atualizarTabela();
-        dispose();        
+        // botão de sair
+        Principal principal = new Principal(); // cria uma nova tela principal
+        principal.setVisible(true); // torna ela visivel
+        principal.atualizarTabela(); // atualiza a tabela principal
+        dispose(); // fecha a tela de cadastro de novo jogo
     }//GEN-LAST:event_jbSair1ActionPerformed
     
-
+// função main do JFrame Cadastro de Jogos
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
