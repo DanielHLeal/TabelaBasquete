@@ -19,7 +19,7 @@ public class Conexao {
     public Conexao(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/projetoproduto?useSSL=true&useTimezone=true&serverTimezone=UTC";
+            String url = "jdbc:mysql://localhost:3306/tabelabasquete";
             String user = "root";
             String password = "daniel9951";
             con = DriverManager.getConnection(url, user, password);
