@@ -15,9 +15,9 @@ public class Conexao { // Classe para realizar a conexão com banco de dados
     public Conexao(){ // Classe para realizar a conexão com banco de dados
         try{
             Class.forName("com.mysql.jdbc.Driver"); // Integração com Driver do SQL
-            String url = "jdbc:mysql://localhost:3306/tabelabasquete"; // conexão com banco de dados Tabela de Basquete
+            String url = "jdbc:mysql://localhost:3306/tabelabasquete?useTimezone=true&serverTimezone=UTC"; // conexão com banco de dados Tabela de Basquete
             String user = "root"; // usuario do mysql
-            String password = "daniel9951";// senha do mysql
+            String password = "admin";// senha do mysql
             con = DriverManager.getConnection(url, user, password); // conecta ao banco passando o caminho do banco, usuario e senha
 
         }catch(ClassNotFoundException erro){ // catch para encontrar erro na conexao
