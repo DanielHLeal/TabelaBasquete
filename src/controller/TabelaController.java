@@ -60,6 +60,14 @@ public class TabelaController {
         for (TabelaModel x:todosItens) { /* for para percorrer o arquivo e descobrir quantos itens tem na tabela */
             cont++;            
         } // fim do primeiro for
+        if(cont == 0){ // saber se é o primeiro codigo
+            tabela.setMinimotemp(tabela.getPlacar()); /* Setar o minimo da tabela para o placar realizado */
+            tabela.setMaxtemp(tabela.getPlacar()); /* Setar o maximo da tabela para o placar realizado */
+            tabela.setQuebrarecordemin(0); /* Incrementa a quebra de recorde minimo*/
+            tabela.setQuebrarecordemax(0); /* Mantem a quebra de recorde maxima */
+            tabela.setJogo(1); /* controle do ultimo codigo do jogo, incrementar o ultimo codigo */
+            entrou = 1; /* setar 1 para saber que entrou no if */
+        }else{        
         for (TabelaModel x:todosItens) { /* for para calcular a função */
             apoio++; /* apoio para controlar qual posição está na tabela */
             if (cont == apoio){ /* if para saber se estar na ultima posição */
@@ -88,6 +96,7 @@ public class TabelaController {
                 } // fim do if quando não entrar em nenhum if
             } // fim do if para saber se estar na ultima posição         
         } // fim do for para calcular a função 
+        } // fim do else
     } // fim do metodo de calcular dados
     
     

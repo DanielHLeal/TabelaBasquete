@@ -60,11 +60,6 @@ public class TabelaControllerTest {
         assertTrue(teste.excluir(t));    
     }
 
-    @Test
-    public void testSelecionarTodosTabelas() {
-        
-    }
-
-    
+      
     
 }
