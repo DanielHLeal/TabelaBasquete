@@ -1,0 +1,18 @@
+CREATE SCHEMA `tabelabasquete` ;
+
+use tabelabasquete;
+
+CREATE TABLE `tabelabasquete`.`jogos` (
+  `jogo` INT NOT NULL,
+  `placar` INT NOT NULL,
+  `minimotemp` INT NOT NULL,
+  `maxtemp` INT NOT NULL,
+  `quebrarecordemax` INT NOT NULL,
+  `quebrarecordemin` INT NOT NULL,
+  PRIMARY KEY (`jogo`));
+
+
+INSERT INTO `tabelabasquete`.`jogos` (`jogo`, `placar`, `minimotemp`, `maxtemp`, `quebrarecordemax`, `quebrarecordemin`) VALUES ('1', '12', '12', '12', '0', '0');
+INSERT INTO `tabelabasquete`.`jogos` (`jogo`, `placar`, `minimotemp`, `maxtemp`, `quebrarecordemax`, `quebrarecordemin`) VALUES ('2', '24', '12', '24', '0', '1');
+INSERT INTO `tabelabasquete`.`jogos` (`jogo`, `placar`, `minimotemp`, `maxtemp`, `quebrarecordemax`, `quebrarecordemin`) VALUES ('3', '10', '10', '24', '1', '1');
+INSERT INTO `tabelabasquete`.`jogos` (`jogo`, `placar`, `minimotemp`, `maxtemp`, `quebrarecordemax`, `quebrarecordemin`) VALUES ('4', '24', '10', '24', '1', '1');
